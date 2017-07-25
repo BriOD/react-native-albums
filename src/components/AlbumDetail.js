@@ -1,32 +1,33 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Linking } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
 
 
-const AlbumDetail = (props) => {
+const AlbumDetail = ({ album }) => {
+  const { title, artist, thumbnail_image, image, url } = album;
   return (
     <Card>
       <CardSection>
         <View style={styles.thumbnailContainerStyle}>
           <Image
             style={styles.thumbnailStyle}
-            source={{ uri: props.album.thumbnail_image }}
+            source={{ uri: thumbnail_image }}
           />
         </View>
         <View style={styles.headerContentStyle}>
-          <Text style={styles.headerTextStyle}>{props.album.title}</Text>
-          <Text>{props.album.artist}</Text>
+          <Text style={styles.headerTextStyle}>{title}</Text>
+          <Text>{artist}</Text>
         </View>
       </CardSection>
 
       <CardSection>
-        <Image style={styles.imageStyle} source={{ uri: props.album.image }} />
+        <Image style={styles.imageStyle} source={{ uri: image }} />
       </CardSection>
 
       <CardSection>
-        <Button onPress={() => console.log(props.album.title)} />
+        <Button onPress={() => Linking.openURL(url)} />
       </CardSection>
     </Card>
   );
